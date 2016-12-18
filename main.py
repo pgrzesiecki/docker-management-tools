@@ -11,9 +11,8 @@ Configure Docker program.
 parser = argparse.ArgumentParser(description="Docker management tools.")
 parser.add_argument("-r", "--remove",
                     nargs="+",
-                    help="remove container and all connected artifacts (image, volume and network)")
-parser.add_argument("-cv", "--clean-volumes", action='store_true',
-                    help="remove orphaned volumes")
+                    help="remove container and all connected artifacts (image, volumes and networks)")
+parser.add_argument("--clean-volumes", action='store_true', help="remove orphaned volumes")
 
 args = parser.parse_args()
 

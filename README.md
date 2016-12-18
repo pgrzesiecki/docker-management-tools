@@ -6,7 +6,7 @@ Docker Tool provide easy way to management Docker containers and all artifacts.
 
 ```bash
 $ docker-management-tools -h
-usage: docker-management-tools [-h] [-r REMOVE [REMOVE ...]] [-cv]
+usage: docker-management-tools [-h] [-r REMOVE [REMOVE ...]] [--clean-volumes]
 
 Docker management tools.
 
@@ -14,8 +14,8 @@ optional arguments:
   -h, --help            show this help message and exit
   -r REMOVE [REMOVE ...], --remove REMOVE [REMOVE ...]
                         remove container and all connected artifacts (image,
-                        volume and network)
-  -cv, --clean-volumes  remove orphaned volumes
+                        volumes and networks)
+  --clean-volumes       remove orphaned volumes
 ```
 
 ### Remove container with all connected artifacts
