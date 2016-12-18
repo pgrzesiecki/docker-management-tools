@@ -35,14 +35,8 @@ $ docker-management-tools -r f05a129487d6 37fe8fc02ff6
 ### Remove orphaned volumes
 
 ```bash
-$ docker-management-tools -cv
+$ docker-management-tools --clean-volumes
 ```
-
-## Usage
-
-This tool is still under development.
-
-If you want to help feel free to pull request.
 
 ## Compile
 
@@ -52,7 +46,7 @@ Using `pyinstaller`:
 pyinstaller main.py -F -n docker-management-tools
 ```
 
-##Credits
+## Credits
 
 Pawel Grzesiecki - Developer (http://signes.pl/) MIT License
 
