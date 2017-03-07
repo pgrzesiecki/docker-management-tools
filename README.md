@@ -12,10 +12,17 @@ Docker management tools.
 
 optional arguments:
   -h, --help            show this help message and exit
+  --ip                  list running containers ip addresses
   -r REMOVE [REMOVE ...], --remove REMOVE [REMOVE ...]
                         remove container and all connected artifacts (image,
                         volumes and networks)
   --clean-volumes       remove orphaned volumes
+```
+
+### List running containers networks name and IP address
+
+```bash
+$ docker-management-tools --ip
 ```
 
 ### Remove container with all connected artifacts

@@ -1,4 +1,5 @@
 import argparse
+import json
 
 import docker
 from termcolor import colored
@@ -9,10 +10,11 @@ client = docker.from_env()
 Configure Docker program.
 """
 parser = argparse.ArgumentParser(description="Docker management tools.")
+parser.add_argument("--ip", action="store_true", help="list running containers ip addresses")
 parser.add_argument("-r", "--remove",
                     nargs="+",
                     help="remove container and all connected artifacts (image, volumes and networks)")
-parser.add_argument("--clean-volumes", action='store_true', help="remove orphaned volumes")
+parser.add_argument("--clean-volumes", action="store_true", help="remove orphaned volumes")
 
 args = parser.parse_args()
 
@@ -131,8 +133,28 @@ def action_remove_network(network_id):
     print "{} [network] Remove '{}'".format(result, network_id)
 
 
+def action_list_ip():
+    for running_container in client.containers.list():
+        if running_container:
+            action_get_container_ip(running_container)
+
+
+def action_get_container_ip(container):
+    if isinstance(container, str):
+        container = get_container_info(container)
+
+    networks = container.attrs["NetworkSettings"]["Networks"]
+    container_name = colored(container.name, "green")
+    print "[{}] {}".format(container.short_id, container_name)
+    for network in networks:
+        print " - {} ({})".format(networks[network]["IPAddress"], network)
+
+
 if args.remove:
     [action_remove_container(to_remove_id) for to_remove_id in args.remove]
+
+if args.ip:
+    action_list_ip()
 
 if args.clean_volumes:
     [action_remove_volume(to_remove_id.id) for to_remove_id in client.volumes.list(filters={"dangling": True})]
